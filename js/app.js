@@ -25,6 +25,7 @@ function initGame() {
     deck.appendChild(card);
     //Invokes click function
     click(card);
+    
   }
 }
 
@@ -34,14 +35,14 @@ function click(card) {
     startTimer();
     const currentCard = this;
     const previousCard = openedCards[0];
-
+    
     if (openedCards.length === 1) {
       card.classList.add('open', 'show', 'disable');
       openedCards.push(this);
-
+      
       // Call function to compare open cards
       compare(currentCard, previousCard);
-
+      
     } else {
       card.classList.add('open', 'show', 'disable');
       openedCards.push(this);
@@ -59,10 +60,10 @@ function compare(currentCard, previousCard) {
     previousCard.classList.add('match');
     // clear openCards when match is found
     openedCards = [];
-
+    
     // check if match
     checkScore();
-
+    
   } else {
     // clear openCards when match is not found
     openedCards = [];
@@ -72,7 +73,7 @@ function compare(currentCard, previousCard) {
       previousCard.classList.remove('open', 'show', 'disable');
     }, 1500);
   }
-
+  
   // Calls addMove function, adds move to move counter
   addMove();
 }
@@ -118,7 +119,7 @@ function rating() {
   if (moves === 15 || moves === 22) {
     hideStar();
   }
-
+  
 }
 // Hides the stars
 function hideStar() {
@@ -157,7 +158,7 @@ initGame();
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
-
+  
   while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
@@ -165,7 +166,7 @@ function shuffle(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
+  
   return array;
 }
 
@@ -177,9 +178,6 @@ const closeBtn = document.getElementsByClassName('closeBtn')[0];
 // Listen for click on modal x button, calls modalClose function
 closeBtn.addEventListener('click', modalClose);
 
-// Listen for outside click, closes modal
-window.addEventListener('click', clickOutside);
-
 // function to display Modal
 function openModal() {
   modal.style.display = 'block';
@@ -189,20 +187,12 @@ function openModal() {
 function modalClose() {
   modal.style.display = 'none';
 }
-
-// function to close modal if clicked outside box
-function clickOutside(event) {
-  if (event.target == modal) {
-    modal.style.display = 'none';
-  }
-}
-
 // Get modal-score variable:
 const modalScore = document.getElementById('modal_score');
 
 // function to retrieve score and place inside modal (Star Rating, Move Counter, and Ending Time)
 function score() {
-  modalScore.innerHTML = `Your Rating Is: ${starRating.innerHTML} &nbsp; | &nbsp; You've Made: ${movesContainer.innerHTML} Moves; | &nbsp; And Your Time Was: ${timerCount.innerHTML}`
+  modalScore.innerHTML = `Your Rating is: ${starRating.innerHTML} &nbsp; | &nbsp; You've made: ${movesContainer.innerHTML} Moves | &nbsp; Your Time Was: ${timerCount.innerHTML}`
 }
 
 // Play Again query selector
@@ -250,7 +240,7 @@ function timer() {
         minute = "0" + minute;
       }
     }
-
+    
     timerCount.innerHTML = `${minute}:${second}`;
     // repeat timer every 1 second
     setTimeout(timer, 1000)
@@ -272,7 +262,7 @@ function stopTimer() {
 function resetTimer() {
   second = 0;
   minute = 0;
-  timerCount.innerHTML = `0${minute}:0${second}`;
+  timerCount.innerHTML = `Time 0${minute}:0${second}`;
   active = false;
   clockT = false;
   resetStyle();
@@ -280,5 +270,6 @@ function resetTimer() {
 
 // function to reset .score-panel width to normal
 function resetStyle() {
-  document.querySelector('.score-panel').style.width = "410px";
+  document.querySelector('.score-panel').style.width = "350px";
 }
+
